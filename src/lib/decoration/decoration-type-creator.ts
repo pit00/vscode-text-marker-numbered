@@ -22,13 +22,25 @@ export default class DecorationTypeCreator {
         const backgroundColour = this.getBackgroundColor(colour);
         const overviewRulerColor = this.configStore.useHighlightColorOnRuler ?
             backgroundColour : this.getBackgroundColor(OVERVIEW_RULER_COLOUR);
+        let digit = this.configStore.highlightColors.indexOf(colour);
+        let index = "⁺"
+        if (digit != -1) { // when match
+            let superscripts = ["⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹"];
+            digit += 1 // 1 indexed
+            index = digit.toString().split('').map(digit => superscripts[parseInt(digit)]).join('');
+        }
         return this.window.createTextEditorDecorationType(
             Object.assign(
                 {
                     backgroundColor: backgroundColour,
                     borderRadius: '.2em',
                     overviewRulerColor: overviewRulerColor,
-                    overviewRulerLane: OverviewRulerLane.Center
+                    overviewRulerLane: OverviewRulerLane.Right,
+                    before: {
+                        width: "1",
+                        contentText: index,
+                        color: "white"
+                    },
                 },
                 this.configStore.autoSelectDistinctiveTextColor && {color: getColorContrast(colour)}
             )
