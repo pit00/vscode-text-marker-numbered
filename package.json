@@ -1,10 +1,10 @@
 {
   "name": "text-marker-numbered",
   "displayName": "Text Marker (Numbered)",
-  "description": "Select text in your code and mark all matches. The highlight colour is configurable",
-  "version": "1.11.3",
+  "description": "Select text in your code and mark all matches, auto numbered",
+  "version": "1.0.0",
   "publisher": "pit00",
-  "license": "SEE LICENSE IN LICENSE.txt",
+  "license": "MIT",
   "icon": "images/text-marker.png",
   "repository": {
     "type": "git",
@@ -75,7 +75,7 @@
         "textmarker.enableWholeMatch": {
           "description": "Enable whole match mode on startup",
           "type": "boolean",
-          "default": false
+          "default": true
         },
         "textmarker.useHighlightColorOnRuler": {
           "description": "Use the highlight colour on the ruler instead of the default colour",

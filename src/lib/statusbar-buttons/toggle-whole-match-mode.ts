@@ -29,10 +29,12 @@ export default class ToggleWholeMatchModeButton {
     private updateButton({wholeMatch}: {wholeMatch: boolean}) {
         const statusBarItem = this.statusBarItem;
         if (wholeMatch) {
-            statusBarItem.text = '🟢 Whole'; // [Ab|]
+            statusBarItem.text = '$(whole-word)🔦'; // 🟢 [Ab|]
+            statusBarItem.color = 'green'
             statusBarItem.tooltip = `${Const.EXTENSION_NAME}: Whole Match On`;
         } else {
-            statusBarItem.text = '🔴 Whole'; // Ab|
+            statusBarItem.text = '$(whole-word)🔦'; // 🔴 Ab|
+            statusBarItem.color = 'red'
             statusBarItem.tooltip = `${Const.EXTENSION_NAME}: Whole Match Off`;
         }
     }

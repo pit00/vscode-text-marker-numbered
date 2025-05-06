@@ -29,13 +29,15 @@ export default class ToggleCaseSensitivityModeButton {
     private updateButton({ignoreCase}: {ignoreCase: boolean}) {
         const statusBarItem = this.statusBarItem;
         if (ignoreCase) {
-            // statusBarItem.text = 'Aa';
-            statusBarItem.text = '🟢 Sensitive';
-            statusBarItem.tooltip = `${Const.EXTENSION_NAME}: Case Insensitive On`;
-        } else {
-            // statusBarItem.text = '[Aa]';
-            statusBarItem.text = '🔴 Sensitive';
+            // statusBarItem.text = '🔴 Aa';
+            statusBarItem.text = '$(case-sensitive)🔦';
+            statusBarItem.color = 'red'
             statusBarItem.tooltip = `${Const.EXTENSION_NAME}: Case Sensitive Off`;
+        } else {
+            // statusBarItem.text = '🟢[Aa]';
+            statusBarItem.text = '$(case-sensitive)🔦';
+            statusBarItem.color = 'green'
+            statusBarItem.tooltip = `${Const.EXTENSION_NAME}: Case Insensitive On`;
         }
     }
 
