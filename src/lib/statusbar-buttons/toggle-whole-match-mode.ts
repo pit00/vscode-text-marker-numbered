@@ -29,11 +29,11 @@ export default class ToggleWholeMatchModeButton {
     private updateButton({wholeMatch}: {wholeMatch: boolean}) {
         const statusBarItem = this.statusBarItem;
         if (wholeMatch) {
-            statusBarItem.text = '[Ab|]';
-            statusBarItem.tooltip = `${Const.EXTENSION_NAME}: Whole Match Mode`;
+            statusBarItem.text = '🟢 Whole'; // [Ab|]
+            statusBarItem.tooltip = `${Const.EXTENSION_NAME}: Whole Match On`;
         } else {
-            statusBarItem.text = 'Ab|';
-            statusBarItem.tooltip = `${Const.EXTENSION_NAME}: Non-Whole Match Mode`;
+            statusBarItem.text = '🔴 Whole'; // Ab|
+            statusBarItem.tooltip = `${Const.EXTENSION_NAME}: Whole Match Off`;
         }
     }
 

@@ -1,18 +1,14 @@
 {
-  "name": "text-marker",
-  "displayName": "Text Marker (Highlighter)",
+  "name": "text-marker-numbered",
+  "displayName": "Text Marker (Numbered)",
   "description": "Select text in your code and mark all matches. The highlight colour is configurable",
-  "version": "1.11.0",
-  "publisher": "ryu1kn",
+  "version": "1.11.3",
+  "publisher": "pit00",
   "license": "SEE LICENSE IN LICENSE.txt",
   "icon": "images/text-marker.png",
-  "bugs": {
-    "url": "https://github.com/ryu1kn/vscode-text-marker/issues"
-  },
-  "homepage": "https://github.com/ryu1kn/vscode-text-marker/blob/master/README.md",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ryu1kn/vscode-text-marker.git"
+    "url": "https://github.com/pit00/vscode-text-marker-numbered"
   },
   "engines": {
     "vscode": "^1.51.0"
@@ -198,7 +194,7 @@
         "textmarker.enableTelemetry": {
           "description": "Allow usage data to be collected",
           "type": "boolean",
-          "default": true
+          "default": false
         }
       }
     },
@@ -355,5 +351,6 @@
   },
   "resolutions": {
     "**/minimist": "^1.2.5"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

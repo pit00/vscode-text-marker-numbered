@@ -135,13 +135,13 @@ export default class CommandFactory {
     }
 
     createToggleCaseSensitivityModeButton() {
-        const alignment = this.vscode.StatusBarAlignment.Right;
+        const alignment = this.vscode.StatusBarAlignment.Left;
         const priority = BASE_STATUS_BAR_PRIORITY + 1;
         return new ToggleCaseSensitivityModeButton(this.getEventBus(), this.vscode.window.createStatusBarItem(alignment, priority));
     }
 
     createToggleWholeMatchModeButton() {
-        const alignment = this.vscode.StatusBarAlignment.Right;
+        const alignment = this.vscode.StatusBarAlignment.Left;
         return new ToggleWholeMatchModeButton(this.getEventBus(), this.vscode.window.createStatusBarItem(alignment, BASE_STATUS_BAR_PRIORITY));
     }
 
