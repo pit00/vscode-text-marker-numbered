@@ -2,7 +2,7 @@
   "name": "text-marker-numbered",
   "displayName": "Text Marker (Numbered)",
   "description": "Select text in your code and mark all matches, auto numbered",
-  "version": "1.0.0",
+  "version": "1.0.7",
   "publisher": "pit00",
   "license": "MIT",
   "icon": "images/text-marker.png",
@@ -40,19 +40,17 @@
             "type": "string"
           },
           "default": [
-            "darkgoldenrod",
             "darkmagenta",
+            "darkblue",
+            "darkorange",
+            "darkturquoise",
             "darkolivegreen",
             "darkslateblue",
-            "darkslategray",
-            "darkviolet",
-            "darkblue",
-            "darkturquoise",
-            "darkgray",
             "darkkhaki",
-            "darkorange",
             "darksalmon",
-            "darkseagreen"
+            "darkseagreen",
+            "darkgoldenrod",
+            "darkslategray"
           ]
         },
         "textmarker.defaultHighlightColor": {
@@ -66,6 +64,11 @@
           "default": 0.7,
           "minimum": 0,
           "maximum": 1
+        },
+        "textmarker.numberedColor": {
+          "description": "Color for numbers. Set 'auto' to get same color of highlighted text",
+          "type": "string",
+          "default": "white"
         },
         "textmarker.enableIgnoreCase": {
           "description": "Enable ignore case mode on startup",
@@ -137,15 +140,15 @@
           },
           "default": {
             "highlightUsingRegex": false,
-            "toggleHighlight": true,
+            "toggleHighlight": false,
             "unhighlight": false,
             "toggleCaseSensitivity": false,
             "toggleWholeMatch": false,
             "clearAllHighlight": false,
             "saveAllHighlights": false,
-            "updateHighlight": true,
-            "goToNextHighlight": true,
-            "goToPreviousHighlight": true
+            "updateHighlight": false,
+            "goToNextHighlight": false,
+            "goToPreviousHighlight": false
           },
           "additionalProperties": false
         },

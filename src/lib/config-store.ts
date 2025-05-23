@@ -39,6 +39,10 @@ export default class ConfigStore {
         return this.get<boolean>('useHighlightColorOnRuler');
     }
 
+    get numberedColor() {
+        return this.get<string[]>('numberedColor');
+    }
+
     get autoSelectDistinctiveTextColor() {
         return this.get<boolean>('autoSelectDistinctiveTextColor');
     }

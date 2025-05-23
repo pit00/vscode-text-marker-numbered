@@ -12,16 +12,16 @@ export default class DecorationTypeCreator {
     private readonly configStore: ConfigStore;
     private readonly window: WindowComponent;
 
-    constructor(configStore: ConfigStore,
-                window: WindowComponent) {
+    constructor(configStore: ConfigStore, window: WindowComponent) {
         this.configStore = configStore;
         this.window = window;
     }
 
     create(colour: string): TextEditorDecorationType {
+        // console.log("CommandService#executeCommandDEV ❯", [this.configStore.numberedColor]);
         const backgroundColour = this.getBackgroundColor(colour);
-        const overviewRulerColor = this.configStore.useHighlightColorOnRuler ?
-            backgroundColour : this.getBackgroundColor(OVERVIEW_RULER_COLOUR);
+        const overviewRulerColor = this.configStore.useHighlightColorOnRuler ? backgroundColour : this.getBackgroundColor(OVERVIEW_RULER_COLOUR);
+
         let digit = this.configStore.highlightColors.indexOf(colour);
         let index = "⁺"
         if (digit != -1) { // when match
@@ -29,6 +29,7 @@ export default class DecorationTypeCreator {
             digit += 1 // 1 indexed
             index = digit.toString().split('').map(digit => superscripts[parseInt(digit)]).join('');
         }
+
         return this.window.createTextEditorDecorationType(
             Object.assign(
                 {
@@ -39,7 +40,7 @@ export default class DecorationTypeCreator {
                     before: {
                         width: "1",
                         contentText: index,
-                        color: "white"
+                        color: this.configStore.numberedColor
                     },
                 },
                 this.configStore.autoSelectDistinctiveTextColor && {color: getColorContrast(colour)}
