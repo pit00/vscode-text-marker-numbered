@@ -1,353 +1,299 @@
 {
-  "name": "text-marker-numbered",
-  "displayName": "Numbered Text Highligter",
-  "description": "Highlight all text matches (numbered)",
-  "version": "1.0.9",
-  "publisher": "pit00",
-  "license": "MIT",
-  "icon": "images/text-marker.png",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/pit00/vscode-text-marker-numbered"
-  },
-  "engines": {
-    "vscode": "^1.51.0"
-  },
-  "categories": [
-    "Other"
-  ],
-  "keywords": [
-    "mark",
-    "marker",
-    "match",
-    "highlight",
-    "search"
-  ],
-  "activationEvents": [
-    "onStartupFinished"
-  ],
-  "main": "./out/extension",
-  "contributes": {
-    "configuration": {
-      "type": "object",
-      "title": "Text Marker (Highlighter) configurations",
-      "properties": {
-        "textmarker.highlightColors": {
-          "description": "List of colors to be used to highlight the selected text",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "default": [
-            "darkmagenta",
-            "darkblue",
-            "darkorange",
-            "darkturquoise",
-            "darkolivegreen",
-            "darkslateblue",
-            "darkkhaki",
-            "darksalmon",
-            "darkseagreen",
-            "darkgoldenrod",
-            "darkslategray"
-          ]
-        },
-        "textmarker.defaultHighlightColor": {
-          "description": "Color to be used once all colors listed in `textmarker.highlightColors` are used",
-          "type": "string",
-          "default": "gray"
-        },
-        "textmarker.defaultHighlightOpacity": {
-          "description": "Opacity to be used when one is not given in the highlight color",
-          "type": "number",
-          "default": 0.7,
-          "minimum": 0,
-          "maximum": 1
-        },
-        "textmarker.numberedColor": {
-          "description": "Color for numbers. Set 'auto' to get same color of highlighted text",
-          "type": "string",
-          "default": "white"
-        },
-        "textmarker.enableIgnoreCase": {
-          "description": "Enable ignore case mode on startup",
-          "type": "boolean",
-          "default": false
-        },
-        "textmarker.enableWholeMatch": {
-          "description": "Enable whole match mode on startup",
-          "type": "boolean",
-          "default": true
-        },
-        "textmarker.useHighlightColorOnRuler": {
-          "description": "Use the highlight colour on the ruler instead of the default colour",
-          "type": "boolean",
-          "default": true
-        },
-        "textmarker.autoSelectDistinctiveTextColor": {
-          "description": "Text colour will be chosen to be distinctive from the background highlight colour",
-          "type": "boolean",
-          "default": false
-        },
-        "textmarker.hideStatusBarItems": {
-          "description": "Hide buttons on the status bar",
-          "type": "boolean",
-          "default": false
-        },
-        "textmarker.delayForRefreshingHighlight": {
-          "description": "Number of milliseconds to wait before refreshing the highlights on editor contents change. null for no refresh",
-          "type": [
-            "number",
-            "null"
-          ],
-          "default": 300
-        },
-        "textmarker.commandsOnContextMenu": {
-          "description": "Commands appear on the context menu",
-          "type": "object",
-          "properties": {
-            "highlightUsingRegex": {
-              "type": "boolean"
-            },
-            "toggleHighlight": {
-              "type": "boolean"
-            },
-            "unhighlight": {
-              "type": "boolean"
-            },
-            "toggleCaseSensitivity": {
-              "type": "boolean"
-            },
-            "toggleWholeMatch": {
-              "type": "boolean"
-            },
-            "clearAllHighlight": {
-              "type": "boolean"
-            },
-            "saveAllHighlights": {
-              "type": "boolean"
-            },
-            "updateHighlight": {
-              "type": "boolean"
-            },
-            "goToNextHighlight": {
-              "type": "boolean"
-            },
-            "goToPreviousHighlight": {
-              "type": "boolean"
-            }
-          },
-          "default": {
-            "highlightUsingRegex": false,
-            "toggleHighlight": false,
-            "unhighlight": false,
-            "toggleCaseSensitivity": false,
-            "toggleWholeMatch": false,
-            "clearAllHighlight": false,
-            "saveAllHighlights": false,
-            "updateHighlight": false,
-            "goToNextHighlight": false,
-            "goToPreviousHighlight": false
-          },
-          "additionalProperties": false
-        },
-        "textmarker.savedHighlights": {
-          "description": "Highlights that get applied when opening editor",
-          "type": "array",
-          "default": [],
-          "items": {
-            "type": "object",
-            "properties": {
-              "pattern": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "enum": [
-                      "string",
-                      "regex"
-                    ]
-                  },
-                  "expression": {
-                    "type": "string"
-                  },
-                  "ignoreCase": {
-                    "type": "boolean"
-                  },
-                  "wholeMatch": {
-                    "type": "boolean"
-                  }
-                },
-                "required": [
-                  "type",
-                  "expression",
-                  "ignoreCase",
-                  "wholeMatch"
-                ]
-              },
-              "color": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "pattern"
-            ]
-          }
-        }
-      }
+    "name": "text-marker-numbered",
+    "displayName": "Numbered Text Highligter",
+    "description": "Highlight all text matches (numbered)",
+    "version": "1.0.9",
+    "publisher": "pit00",
+    "license": "MIT",
+    "icon": "images/text-marker.png",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/pit00/vscode-text-marker-numbered"
     },
-    "commands": [
-      {
-        "command": "textmarker.highlightUsingRegex",
-        "title": "Highlight Text Using Regex",
-        "category": "TextMarker"
-      },
-      {
-        "command": "textmarker.toggleHighlight",
-        "title": "Toggle Highlight",
-        "category": "TextMarker"
-      },
-      {
-        "command": "textmarker.unhighlight",
-        "title": "Unhighlight Text",
-        "category": "TextMarker"
-      },
-      {
-        "command": "textmarker.toggleCaseSensitivity",
-        "title": "Toggle Case Sensitivity",
-        "category": "TextMarker"
-      },
-      {
-        "command": "textmarker.toggleModeForCaseSensitivity",
-        "title": "Toggle Mode for Case Sensitivity",
-        "category": "TextMarker"
-      },
-      {
-        "command": "textmarker.toggleWholeMatch",
-        "title": "Toggle Whole/Partial Match",
-        "category": "TextMarker"
-      },
-      {
-        "command": "textmarker.toggleModeForWholeMatch",
-        "title": "Toggle Mode for Whole/Partial Match",
-        "category": "TextMarker"
-      },
-      {
-        "command": "textmarker.clearAllHighlight",
-        "title": "Clear All Highlights",
-        "category": "TextMarker"
-      },
-      {
-        "command": "textmarker.saveAllHighlights",
-        "title": "Save All Highlights",
-        "category": "TextMarker"
-      },
-      {
-        "command": "textmarker.updateHighlight",
-        "title": "Update Highlight",
-        "category": "TextMarker"
-      },
-      {
-        "command": "textmarker.goToNextHighlight",
-        "title": "Go to Next Same Highlight",
-        "category": "TextMarker"
-      },
-      {
-        "command": "textmarker.goToPreviousHighlight",
-        "title": "Go to Previous Same Highlight",
-        "category": "TextMarker"
-      }
+    "engines": {
+        "vscode": "^1.51.0"
+    },
+    "categories": [
+        "Other"
     ],
-    "menus": {
-      "editor/context": [
-        {
-          "command": "textmarker.toggleHighlight",
-          "group": "2_textmarker@1",
-          "when": "editorTextFocus && config.textmarker.commandsOnContextMenu.toggleHighlight"
+    "keywords": [
+        "mark",
+        "marker",
+        "match",
+        "highlight",
+        "search"
+    ],
+    "activationEvents": [
+        "onStartupFinished"
+    ],
+    "main": "./out/extension",
+    "contributes": {
+        "configuration": {
+            "type": "object",
+            "title": "Text Marker (Highlighter) configurations",
+            "properties": {
+                "textmarker.highlightColors": {
+                    "description": "List of colors to be used to highlight the selected text",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "default": [
+                        "darkmagenta",
+                        "darkblue",
+                        "darkorange",
+                        "darkturquoise",
+                        "darkolivegreen",
+                        "darkslateblue",
+                        "darkkhaki",
+                        "darksalmon",
+                        "darkseagreen",
+                        "darkgoldenrod",
+                        "darkslategray"
+                    ]
+                },
+                "textmarker.defaultHighlightColor": {
+                    "description": "Color to be used once all colors listed in `textmarker.highlightColors` are used",
+                    "type": "string",
+                    "default": "gray"
+                },
+                "textmarker.defaultHighlightOpacity": {
+                    "description": "Opacity to be used when one is not given in the highlight color",
+                    "type": "number",
+                    "default": 0.7,
+                    "minimum": 0,
+                    "maximum": 1
+                },
+                "textmarker.numberedColor": {
+                    "description": "Color for numbers. Set 'auto' to get same color of highlighted text",
+                    "type": "string",
+                    "default": "white"
+                },
+                "textmarker.enableIgnoreCase": {
+                    "description": "Enable ignore case mode on startup",
+                    "type": "boolean",
+                    "default": false
+                },
+                "textmarker.enableWholeMatch": {
+                    "description": "Enable whole match mode on startup",
+                    "type": "boolean",
+                    "default": true
+                },
+                "textmarker.useHighlightColorOnRuler": {
+                    "description": "Use the highlight colour on the ruler instead of the default colour",
+                    "type": "boolean",
+                    "default": true
+                },
+                "textmarker.autoSelectDistinctiveTextColor": {
+                    "description": "Text colour will be chosen to be distinctive from the background highlight colour",
+                    "type": "boolean",
+                    "default": false
+                },
+                "textmarker.hideStatusBarItems": {
+                    "description": "Hide buttons on the status bar",
+                    "type": "boolean",
+                    "default": false
+                },
+                "textmarker.delayForRefreshingHighlight": {
+                    "description": "Number of milliseconds to wait before refreshing the highlights on editor contents change. null for no refresh",
+                    "type": [
+                        "number",
+                        "null"
+                    ],
+                    "default": 300
+                },
+                "textmarker.commandsOnContextMenu": {
+                    "description": "Commands appear on the context menu",
+                    "type": "object",
+                    "properties": {
+                        "highlightUsingRegex": {
+                            "type": "boolean"
+                        },
+                        "toggleHighlight": {
+                            "type": "boolean"
+                        },
+                        "unhighlight": {
+                            "type": "boolean"
+                        },
+                        "toggleCaseSensitivity": {
+                            "type": "boolean"
+                        },
+                        "toggleWholeMatch": {
+                            "type": "boolean"
+                        },
+                        "clearAllHighlight": {
+                            "type": "boolean"
+                        },
+                        "saveAllHighlights": {
+                            "type": "boolean"
+                        },
+                        "updateHighlight": {
+                            "type": "boolean"
+                        },
+                        "goToNextHighlight": {
+                            "type": "boolean"
+                        },
+                        "goToPreviousHighlight": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "highlightUsingRegex": false,
+                        "toggleHighlight": false,
+                        "unhighlight": false,
+                        "toggleCaseSensitivity": false,
+                        "toggleWholeMatch": false,
+                        "clearAllHighlight": false,
+                        "saveAllHighlights": false,
+                        "updateHighlight": false,
+                        "goToNextHighlight": false,
+                        "goToPreviousHighlight": false
+                    },
+                    "additionalProperties": false
+                },
+                "textmarker.savedHighlights": {
+                    "description": "Highlights that get applied when opening editor",
+                    "type": "array",
+                    "default": [],
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "pattern": {
+                                "type": "object",
+                                "properties": {
+                                    "type": {
+                                        "enum": [
+                                            "string",
+                                            "regex"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "type": "string"
+                                    },
+                                    "ignoreCase": {
+                                        "type": "boolean"
+                                    },
+                                    "wholeMatch": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "required": [
+                                    "type",
+                                    "expression",
+                                    "ignoreCase",
+                                    "wholeMatch"
+                                ]
+                            },
+                            "color": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "pattern"
+                        ]
+                    }
+                }
+            }
         },
-        {
-          "command": "textmarker.updateHighlight",
-          "group": "2_textmarker@2",
-          "when": "editorTextFocus && config.textmarker.commandsOnContextMenu.updateHighlight"
-        },
-        {
-          "command": "textmarker.goToNextHighlight",
-          "group": "2_textmarker@3",
-          "when": "editorTextFocus && config.textmarker.commandsOnContextMenu.goToNextHighlight"
-        },
-        {
-          "command": "textmarker.goToPreviousHighlight",
-          "group": "2_textmarker@4",
-          "when": "editorTextFocus && config.textmarker.commandsOnContextMenu.goToPreviousHighlight"
-        },
-        {
-          "command": "textmarker.highlightUsingRegex",
-          "group": "2_textmarker@5",
-          "when": "editorTextFocus && config.textmarker.commandsOnContextMenu.highlightUsingRegex"
-        },
-        {
-          "command": "textmarker.unhighlight",
-          "group": "2_textmarker@6",
-          "when": "editorTextFocus && config.textmarker.commandsOnContextMenu.unhighlight"
-        },
-        {
-          "command": "textmarker.toggleCaseSensitivity",
-          "group": "2_textmarker@7",
-          "when": "editorTextFocus && config.textmarker.commandsOnContextMenu.toggleCaseSensitivity"
-        },
-        {
-          "command": "textmarker.toggleWholeMatch",
-          "group": "2_textmarker@8",
-          "when": "editorTextFocus && config.textmarker.commandsOnContextMenu.toggleWholeMatch"
-        },
-        {
-          "command": "textmarker.clearAllHighlight",
-          "group": "2_textmarker@9",
-          "when": "editorTextFocus && config.textmarker.commandsOnContextMenu.clearAllHighlight"
-        },
-        {
-          "command": "textmarker.saveAllHighlights",
-          "group": "2_textmarker@10",
-          "when": "editorTextFocus && config.textmarker.commandsOnContextMenu.saveAllHighlights"
-        }
-      ]
-    }
-  },
-  "scripts": {
-    "vscode:prepublish": "yarn run compile",
-    "vscode:postpublish": "./tag-release.sh",
-    "postinstall": "node ./node_modules/vscode/bin/install",
-    "coverage": "nyc mocha 'src/test/**/*.ts'",
-    "compile": "tsc -p ./",
-    "lint": "tslint -p .",
-    "check": "yarn run compile && yarn run lint && yarn test",
-    "watch": "tsc -watch -p ./",
-    "test": "mocha 'src/test/**/*.ts'",
-    "unit-test": "mocha 'src/test/unit/**/*.ts'",
-    "acceptance-test": "mocha 'src/test/acceptance/**/*.ts'",
-    "test-mode": "mocha 'src/test/unit/**/*.ts' --watch"
-  },
-  "devDependencies": {
-    "@types/mocha": "^8.0.4",
-    "@types/node": "^12.14.1",
-    "codeclimate-test-reporter": "^0.5.1",
-    "mocha": "^8.2.1",
-    "nyc": "^15.1.0",
-    "testdouble": "^3.13.1",
-    "ts-node": "^9.0.0",
-    "tslint": "^6.1.3",
-    "typescript": "^4.1.2",
-    "vscode": "^1.1.37"
-  },
-  "dependencies": {
-    "color-name": "1.1.4",
-    "color-rgba": "2.2.3",
-    "fp-ts": "2.9.0",
-    "lodash.isnumber": "3.0.3",
-    "uuid": "3.3.3",
-    "vscode-extension-telemetry": "0.0.22"
-  },
-  "resolutions": {
-    "**/minimist": "^1.2.5"
-  },
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+        "commands": [
+            {
+                "command": "textmarker.highlightUsingRegex",
+                "title": "Highlight Text Using Regex",
+                "category": "TextMarker"
+            },
+            {
+                "command": "textmarker.toggleHighlight",
+                "title": "Toggle Highlight",
+                "category": "TextMarker"
+            },
+            {
+                "command": "textmarker.unhighlight",
+                "title": "Unhighlight Text",
+                "category": "TextMarker"
+            },
+            {
+                "command": "textmarker.toggleCaseSensitivity",
+                "title": "Toggle Case Sensitivity",
+                "category": "TextMarker"
+            },
+            {
+                "command": "textmarker.toggleModeForCaseSensitivity",
+                "title": "Toggle Mode for Case Sensitivity",
+                "category": "TextMarker"
+            },
+            {
+                "command": "textmarker.toggleWholeMatch",
+                "title": "Toggle Whole/Partial Match",
+                "category": "TextMarker"
+            },
+            {
+                "command": "textmarker.toggleModeForWholeMatch",
+                "title": "Toggle Mode for Whole/Partial Match",
+                "category": "TextMarker"
+            },
+            {
+                "command": "textmarker.clearAllHighlight",
+                "title": "Clear All Highlights",
+                "category": "TextMarker"
+            },
+            {
+                "command": "textmarker.saveAllHighlights",
+                "title": "Save All Highlights",
+                "category": "TextMarker"
+            },
+            {
+                "command": "textmarker.updateHighlight",
+                "title": "Update Highlight",
+                "category": "TextMarker"
+            },
+            {
+                "command": "textmarker.goToNextHighlight",
+                "title": "Go to Next Same Highlight",
+                "category": "TextMarker"
+            },
+            {
+                "command": "textmarker.goToPreviousHighlight",
+                "title": "Go to Previous Same Highlight",
+                "category": "TextMarker"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "yarn run compile",
+        "vscode:postpublish": "./tag-release.sh",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "coverage": "nyc mocha 'src/test/**/*.ts'",
+        "compile": "tsc -p ./",
+        "lint": "tslint -p .",
+        "check": "yarn run compile && yarn run lint && yarn test",
+        "watch": "tsc -watch -p ./",
+        "test": "mocha 'src/test/**/*.ts'",
+        "unit-test": "mocha 'src/test/unit/**/*.ts'",
+        "acceptance-test": "mocha 'src/test/acceptance/**/*.ts'",
+        "test-mode": "mocha 'src/test/unit/**/*.ts' --watch"
+    },
+    "devDependencies": {
+        "@types/mocha": "^8.0.4",
+        "@types/node": "^12.14.1",
+        "codeclimate-test-reporter": "^0.5.1",
+        "mocha": "^8.2.1",
+        "nyc": "^15.1.0",
+        "testdouble": "^3.13.1",
+        "ts-node": "^9.0.0",
+        "tslint": "^6.1.3",
+        "typescript": "^4.1.2",
+        "vscode": "^1.1.37"
+    },
+    "dependencies": {
+        "color-name": "1.1.4",
+        "color-rgba": "2.2.3",
+        "fp-ts": "2.9.0",
+        "lodash.isnumber": "3.0.3",
+        "uuid": "3.3.3",
+        "vscode-extension-telemetry": "0.0.22"
+    },
+    "resolutions": {
+        "**/minimist": "^1.2.5"
+    },
+    "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
