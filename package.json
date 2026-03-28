@@ -1,8 +1,8 @@
 {
     "name": "numbered-highlighter",
     "displayName": "Numbered Highlighter",
-    "description": "Highlight all text matches (numbered)",
-    "version": "1.1.16",
+    "description": "Count and higlight selection, with custom decorators",
+    "version": "1.2.0",
     "publisher": "pit00",
     "license": "MIT",
     "icon": "images/text-marker.png",
@@ -39,23 +39,13 @@
                         "type": "string"
                     },
                     "default": [
-                        "darkmagenta",
-                        "darkblue",
-                        "darkorange",
-                        "darkturquoise",
-                        "darkolivegreen",
-                        "darkslateblue",
-                        "darkkhaki",
-                        "darksalmon",
-                        "darkseagreen",
-                        "darkgoldenrod",
-                        "darkslategray"
+                        "darkmagenta", "darkblue", "darkorange", "darkturquoise", "darkolivegreen", "darkslateblue", "darkkhaki", "darksalmon", "darkseagreen", "darkorchid", "darkgoldenrod", "darkslategray", "darkred", "darkgreen", "darkcyan", "darkviolet", "darkgray"
                     ]
                 },
                 "textmarker.defaultHighlightColor": {
                     "description": "Color to be used once all colors listed in `textmarker.highlightColors` are used",
                     "type": "string",
-                    "default": "gray"
+                    "default": "white"
                 },
                 "textmarker.defaultHighlightOpacity": {
                     "description": "Opacity to be used when one is not given in the highlight color",
@@ -68,16 +58,6 @@
                     "description": "Enable to randomize the list of colors (can be dupped)",
                     "type": "boolean",
                     "default": false
-                },
-                "textmarker.loop": {
-                    "description": "Loop through the list of colors (disables default highlight color)",
-                    "type": "boolean",
-                    "default": false
-                },
-                "textmarker.numberedColor": {
-                    "description": "Color for numbers. Set 'auto' to get same color of highlighted text",
-                    "type": "string",
-                    "default": "white"
                 },
                 "textmarker.enableIgnoreCase": {
                     "description": "Enable ignore case mode on startup",

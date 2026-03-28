@@ -4,9 +4,7 @@ Fork of [Text Marker (Highlighter)](https://github.com/ryu1kn/vscode-text-marker
 
 ## Changes and Additions
 
-* Different default `textmarker.highlightColors`
-
-* Added `textmarker.numberedColor`
+* Change all default settings values and decorators
 
 * Status bar shorcuts for `textmarker.enableIgnoreCase` and `enableWholeMatch`
 
@@ -15,8 +13,3 @@ Fork of [Text Marker (Highlighter)](https://github.com/ryu1kn/vscode-text-marker
 * overviewRulerLane: Right
 
 * Added `textmarker.random`
-
-* Added `textmarker.loop`
-
-* Border Only
-- Same description? Yes

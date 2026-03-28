@@ -28,11 +28,6 @@ export default class DecorationTypeCreator {
             index = digit.toString().split('').map(digit => superscripts[parseInt(digit)]).join('');
         }
         
-        // if(this.configStore.loop){
-        //     if (index == "⁺"){ // gray
-        //     }
-        // }
-        
         if(this.configStore.random){
             colour = allColours[Math.floor(Math.random() * allColours.length)];
         }
@@ -40,32 +35,21 @@ export default class DecorationTypeCreator {
         // corrected custom color
         const backgroundColour = this.getBackgroundColor(colour);
         // use custom color instead of default for the ruler
-        const overviewRulerColor = this.configStore.useHighlightColorOnRuler ? backgroundColour : this.getBackgroundColor(OVERVIEW_RULER_COLOUR);
-        
-        let digColor = String(this.configStore.numberedColor)
-        if (String(digColor) == "auto"){
-            digColor = backgroundColour
-        }
+        const overviewRulerColor = this.configStore.useHighlightColorOnRuler ? colour : this.getBackgroundColor(OVERVIEW_RULER_COLOUR);
         
         return this.window.createTextEditorDecorationType(
             Object.assign(
                 {
-                    // backgroundColor: backgroundColour,
-                    // border: "2px solid blue",
-                    borderWidth: "2px",
+                    backgroundColor: backgroundColour,
                     borderStyle: "solid",
-                    borderColor: backgroundColour,
-                    borderRadius: "3px", //'.2em',
+                    borderColor: colour,
                     overviewRulerColor: overviewRulerColor,
                     overviewRulerLane: OverviewRulerLane.Right,
                     before: {
                         width: "1",
                         contentText: index,
-                        color: digColor,
-                        borderColor: backgroundColour,
-                        borderWidth: "2px",
-                        borderStyle: "solid",
-                        backgroundColor: backgroundColour,
+                        color: getColorContrast(colour),
+                        backgroundColor: colour
                     },
                 },
                 this.configStore.autoSelectDistinctiveTextColor && {color: getColorContrast(colour)} // if enable, use color: Contrast
