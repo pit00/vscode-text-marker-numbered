@@ -1,8 +1,8 @@
 {
-    "name": "text-marker-numbered",
-    "displayName": "Numbered Text Highligter",
+    "name": "numbered-highlighter",
+    "displayName": "Numbered Highlighter",
     "description": "Highlight all text matches (numbered)",
-    "version": "1.0.9",
+    "version": "1.1.16",
     "publisher": "pit00",
     "license": "MIT",
     "icon": "images/text-marker.png",
@@ -64,6 +64,16 @@
                     "minimum": 0,
                     "maximum": 1
                 },
+                "textmarker.random": {
+                    "description": "Enable to randomize the list of colors (can be dupped)",
+                    "type": "boolean",
+                    "default": false
+                },
+                "textmarker.loop": {
+                    "description": "Loop through the list of colors (disables default highlight color)",
+                    "type": "boolean",
+                    "default": false
+                },
                 "textmarker.numberedColor": {
                     "description": "Color for numbers. Set 'auto' to get same color of highlighted text",
                     "type": "string",
@@ -101,55 +111,6 @@
                         "null"
                     ],
                     "default": 300
-                },
-                "textmarker.commandsOnContextMenu": {
-                    "description": "Commands appear on the context menu",
-                    "type": "object",
-                    "properties": {
-                        "highlightUsingRegex": {
-                            "type": "boolean"
-                        },
-                        "toggleHighlight": {
-                            "type": "boolean"
-                        },
-                        "unhighlight": {
-                            "type": "boolean"
-                        },
-                        "toggleCaseSensitivity": {
-                            "type": "boolean"
-                        },
-                        "toggleWholeMatch": {
-                            "type": "boolean"
-                        },
-                        "clearAllHighlight": {
-                            "type": "boolean"
-                        },
-                        "saveAllHighlights": {
-                            "type": "boolean"
-                        },
-                        "updateHighlight": {
-                            "type": "boolean"
-                        },
-                        "goToNextHighlight": {
-                            "type": "boolean"
-                        },
-                        "goToPreviousHighlight": {
-                            "type": "boolean"
-                        }
-                    },
-                    "default": {
-                        "highlightUsingRegex": false,
-                        "toggleHighlight": false,
-                        "unhighlight": false,
-                        "toggleCaseSensitivity": false,
-                        "toggleWholeMatch": false,
-                        "clearAllHighlight": false,
-                        "saveAllHighlights": false,
-                        "updateHighlight": false,
-                        "goToNextHighlight": false,
-                        "goToPreviousHighlight": false
-                    },
-                    "additionalProperties": false
                 },
                 "textmarker.savedHighlights": {
                     "description": "Highlights that get applied when opening editor",

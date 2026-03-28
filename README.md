@@ -1,9 +1,22 @@
-# Numbered Text Highligter
+# Numbered Highlighter
 
-Fork of Text Marker, adding numbered matches and some more customizations
+Fork of [Text Marker (Highlighter)](https://github.com/ryu1kn/vscode-text-marker), adding numbered matches and some more customizations
 
-## Extension Settings
+## Changes and Additions
 
-* `textmarker.numberedColor` (default: `white`)
+* Different default `textmarker.highlightColors`
 
-    Color of numbers
+* Added `textmarker.numberedColor`
+
+* Status bar shorcuts for `textmarker.enableIgnoreCase` and `enableWholeMatch`
+
+* Removed context menus
+
+* overviewRulerLane: Right
+
+* Added `textmarker.random`
+
+* Added `textmarker.loop`
+
+* Border Only
+- Same description? Yes

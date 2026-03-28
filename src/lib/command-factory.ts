@@ -47,48 +47,48 @@ export default class CommandFactory {
     private textLocationRegistry?: TextLocationRegistry;
     private windowComponent?: WindowComponent;
     private decorationTypeRegistry?: DecorationTypeRegistry;
-
+    
     constructor(vscode: any, logger: Logger) {
         this.vscode = vscode;
         this.logger = logger;
     }
-
+    
     createToggleHighlightCommand() {
         return new ToggleHighlightCommand(this.getMatchingModeRegistry(), this.getTextLocationRegistry(), this.getDecorationRegistry(), this.getDecorationTypeRegistry(), this.getWindowComponent());
     }
-
+    
     createHighlightUsingRegex() {
         return new HighlightUsingRegexCommand(this.getDecorationOperatorFactory(), this.getMatchingModeRegistry(), this.getWindowComponent());
     }
-
+    
     createUnhighlightCommand() {
         return new UnhighlightCommand(this.getDecorationOperatorFactory(), this.getDecorationPicker());
     }
-
+    
     createRemoveAllHighlightsCommand() {
         return new RemoveAllHighlightsCommand(this.getDecorationOperatorFactory());
     }
-
+    
     createSaveAllHighlightsCommand() {
         return new SaveAllHighlightsCommand(this.getConfigStore(), this.getDecorationRegistry());
     }
-
+    
     createToggleCaseSensitivityCommand() {
         return new ToggleCaseSensitivityCommand(this.getDecorationOperatorFactory(), this.getDecorationPicker());
     }
-
+    
     createToggleCaseSensitivityModeCommand() {
         return new ToggleCaseSensitivityModeCommand(this.getMatchingModeRegistry());
     }
-
+    
     createToggleWholeMatchCommand() {
         return new ToggleWholeMatchCommand(this.getDecorationOperatorFactory(), this.getDecorationPicker());
     }
-
+    
     createToggleWholeMatchModeCommand() {
         return new ToggleWholeMatchModeCommand(this.getMatchingModeRegistry());
     }
-
+    
     createUpdateHighlightCommand() {
         return new UpdateHighlightCommand(
             this.getDecorationOperatorFactory(),
@@ -97,20 +97,20 @@ export default class CommandFactory {
             this.getTextLocationRegistry()
         );
     }
-
+    
     createGoToNextHighlightCommand() {
         return new GoToNextHighlightCommand(this.getMatchingModeRegistry(), this.getTextLocationRegistry(), this.getDecorationRegistry(), this.getDecorationTypeRegistry(), this.getWindowComponent());
     }
-
+    
     createGoToPreviousHighlightCommand() {
         return new GoToPreviousHighlightCommand(this.getMatchingModeRegistry(), this.getTextLocationRegistry(), this.getDecorationRegistry(), this.getDecorationTypeRegistry(), this.getWindowComponent());
     }
-
+    
     createAutoRefreshDecoration() {
         const command = new AutoRefreshDecoration(this.getDecorationOperatorFactory());
         return this._wrapCommand(command);
     }
-
+    
     createAutoRefreshDecorationWithDelay() {
         const command = new AutoRefreshDecorationWithDelay(
             this.getDecorationOperatorFactory(),
@@ -120,11 +120,11 @@ export default class CommandFactory {
         );
         return this._wrapCommand(command);
     }
-
+    
     private _wrapCommand(command: CommandLike) {
         return new AutoTriggerCommand(command, this.logger);
     }
-
+    
     createSavedHighlightsRestorer() {
         return new SavedHighlightsRestorer(
             this.getConfigStore(),
@@ -133,100 +133,99 @@ export default class CommandFactory {
             this.getEventBus()
         );
     }
-
+    
     createToggleCaseSensitivityModeButton() {
         const alignment = this.vscode.StatusBarAlignment.Left;
         const priority = BASE_STATUS_BAR_PRIORITY + 1;
         return new ToggleCaseSensitivityModeButton(this.getEventBus(), this.vscode.window.createStatusBarItem(alignment, priority));
     }
-
+    
     createToggleWholeMatchModeButton() {
         const alignment = this.vscode.StatusBarAlignment.Left;
         return new ToggleWholeMatchModeButton(this.getEventBus(), this.vscode.window.createStatusBarItem(alignment, BASE_STATUS_BAR_PRIORITY));
     }
-
+    
     getEventBus() {
         this.eventBus = this.eventBus || new EventEmitter();
         return this.eventBus;
     }
-
+    
     private getDecorationOperatorFactory() {
         this.decorationOperatorFactory = this.decorationOperatorFactory || this.createDecorationOperatorFactory();
         return this.decorationOperatorFactory;
     }
-
+    
     getConfigStore() {
         this.configStore = this.configStore || this.createConfigStore();
         return this.configStore;
     }
-
+    
     private createConfigStore() {
         return new ConfigStore(this.vscode.workspace, this.getConfigTargetPicker());
     }
-
+    
     private getConfigTargetPicker() {
         this.configTargetPicker = this.configTargetPicker || this.createConfigTargetPicker();
         return this.configTargetPicker;
     }
-
+    
     private createConfigTargetPicker() {
         return new ConfigTargetPicker(this.getWindowComponent());
     }
-
+    
     private getDecorationRegistry() {
         this.decorationRegistry = this.decorationRegistry || this.createDecorationRegistry();
         return this.decorationRegistry;
     }
-
+    
     private getDecorationTypeRegistry() {
         this.decorationTypeRegistry = this.decorationTypeRegistry || this.createDecorationTypeRegistry();
         return this.decorationTypeRegistry;
     }
-
+    
     private createDecorationOperatorFactory() {
         return new DecorationOperatorFactory(this.getDecorationRegistry(), this.getDecorationTypeRegistry(), this.getTextLocationRegistry(), this.getWindowComponent());
     }
-
+    
     private createDecorationRegistry() {
         const configStore = this.getConfigStore();
         return new DecorationRegistry(configStore, generateUuid);
     }
-
+    
     private createDecorationTypeRegistry() {
         return new DecorationTypeRegistry(this.getConfigStore(), this.getWindowComponent());
     }
-
+    
     private getDecorationPicker() {
         this.decorationPicker = this.decorationPicker || this.createDecorationPicker();
         return this.decorationPicker;
     }
-
+    
     private createDecorationPicker() {
         return new DecorationPicker(this.getDecorationRegistry(), this.getWindowComponent());
     }
-
+    
     private getMatchingModeRegistry() {
         this.matchingModeRegistry = this.matchingModeRegistry || this.createMatchingModeRegistry();
         return this.matchingModeRegistry;
     }
-
+    
     private createMatchingModeRegistry() {
         const configStore = this.getConfigStore();
         return new MatchingModeRegistry(configStore.enableIgnoreCase, configStore.enableWholeMatch, this.getEventBus());
     }
-
+    
     private getTextLocationRegistry() {
         this.textLocationRegistry = this.textLocationRegistry || new TextLocationRegistry();
         return this.textLocationRegistry;
     }
-
+    
     private getWindowComponent() {
         this.windowComponent = this.windowComponent || this.createWindowComponent();
         return this.windowComponent;
     }
-
+    
     private createWindowComponent() {
         return new WindowComponent(this.vscode.window);
     }
-
 }
